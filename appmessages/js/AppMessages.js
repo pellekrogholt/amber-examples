@@ -7,7 +7,7 @@ smalltalk.App.comment="App Messages\x0a\x0aPlay around with App in the Workspace
 smalltalk.addMethod(
 smalltalk.method({
 selector: "buildUI",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (){
 var self=this;
 function $MainView(){return smalltalk.MainView||(typeof MainView=="undefined"?nil:MainView)}
@@ -29,7 +29,7 @@ smalltalk.App);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "mainView",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -49,7 +49,7 @@ smalltalk.App.klass.iVarNames = ['instance'];
 smalltalk.addMethod(
 smalltalk.method({
 selector: "begin",
-category: 'bootstrapping',
+protocol: 'bootstrapping',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -66,7 +66,7 @@ smalltalk.App.klass);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "instance",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -86,7 +86,7 @@ smalltalk.addClass('MainView', smalltalk.Widget, ['tagBrush', 'messageCollection
 smalltalk.addMethod(
 smalltalk.method({
 selector: "initialize",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (){
 var self=this;
 function $MessageCollectionView(){return smalltalk.MessageCollectionView||(typeof MessageCollectionView=="undefined"?nil:MessageCollectionView)}
@@ -107,7 +107,7 @@ smalltalk.MainView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "renderOn:",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -130,7 +130,7 @@ smalltalk.addClass('MessageCollection', smalltalk.Object, ['messageItems', 'titl
 smalltalk.addMethod(
 smalltalk.method({
 selector: "messageItems",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (){
 var self=this;
 var messages;
@@ -170,7 +170,7 @@ smalltalk.MessageCollection);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "title",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -188,7 +188,7 @@ smalltalk.MessageCollection);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "title:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (value){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -208,7 +208,7 @@ smalltalk.MessageCollectionView.comment="Message colletion view\x0a\x0aPlay with
 smalltalk.addMethod(
 smalltalk.method({
 selector: "addMessage",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (){
 var self=this;
 var m;
@@ -231,7 +231,7 @@ smalltalk.MessageCollectionView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "addMessageItemView:",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (aMessageItemView){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -246,8 +246,28 @@ smalltalk.MessageCollectionView);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "listAllMessages",
+protocol: 'not yet classified',
+fn: function (){
+var self=this;
+function $MessageItemView(){return smalltalk.MessageItemView||(typeof MessageItemView=="undefined"?nil:MessageItemView)}
+return smalltalk.withContext(function($ctx1) { 
+_st(_st(self["@messageCollection"])._messageItems())._do_((function(item){
+return smalltalk.withContext(function($ctx2) {
+return self._addMessageItemView_(_st(_st($MessageItemView())._new())._messageItem_(item));
+}, function($ctx2) {$ctx2.fillBlock({item:item},$ctx1,1)})}));
+return self}, function($ctx1) {$ctx1.fill(self,"listAllMessages",{},smalltalk.MessageCollectionView)})},
+args: [],
+source: "listAllMessages\x0a\x0a\x09messageCollection messageItems do: [:item | \x0a\x09    self addMessageItemView: (MessageItemView new messageItem: item).\x09    \x0a\x09].",
+messageSends: ["do:", "messageItems", "addMessageItemView:", "messageItem:", "new"],
+referencedClasses: ["MessageItemView"]
+}),
+smalltalk.MessageCollectionView);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "messageCollection:",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (aMessageCollection){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -263,7 +283,7 @@ smalltalk.MessageCollectionView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "removeFromDom",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -279,10 +299,9 @@ smalltalk.MessageCollectionView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "renderOn:",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (html){
 var self=this;
-function $MessageItemView(){return smalltalk.MessageItemView||(typeof MessageItemView=="undefined"?nil:MessageItemView)}
 return smalltalk.withContext(function($ctx1) { 
 var $1,$2,$3,$5,$4;
 self["@viewDomElement"]=_st(html)._div_((function(){
@@ -321,15 +340,12 @@ return self["@messageCollectionPlaceholder"];
 $ctx2.sendIdx["with:"]=2;
 return $4;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
-_st(_st(self["@messageCollection"])._messageItems())._do_((function(item){
-return smalltalk.withContext(function($ctx2) {
-return self._addMessageItemView_(_st(_st($MessageItemView())._new())._messageItem_(item));
-}, function($ctx2) {$ctx2.fillBlock({item:item},$ctx1,6)})}));
+self._listAllMessages();
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.MessageCollectionView)})},
 args: ["html"],
-source: "renderOn: html        \x0a\x09viewDomElement := html div: [\x0a\x0a\x09\x09html h2: messageCollection title capitalized.\x0a\x0a\x09\x09html button \x0a\x09\x09    class: 'btn btn-primary'; \x0a\x09\x09    with: 'Add message'; \x0a\x09\x09    onClick: [ self addMessage ].\x0a\x09\x09\x09\x09\x0a\x09\x09html table class: 'table table-condensed'; with: [\x0a\x09\x09\x09html thead with: [\x0a\x09\x09\x09\x09html tr with: [\x0a\x09\x09\x09\x09        html th with: 'Num'.\x0a\x09\x09\x09\x09\x09html th with: 'Message'.\x0a\x09\x09\x09\x09].\x0a\x09\x09\x09].\x09\x09\x0a\x09\x09\x09messageCollectionPlaceholder := html tbody.\x0a\x0a\x09\x09].\x0a\x09].        \x0a\x09\x22TODO: how to do this inside the messageCollectionPlaceholder := html tbody.\x22\x0a\x09messageCollection messageItems do: [:item | \x0a\x09    self addMessageItemView: (MessageItemView new messageItem: item).\x09    \x0a\x09].",
-messageSends: ["div:", "h2:", "capitalized", "title", "class:", "button", "with:", "onClick:", "addMessage", "table", "thead", "tr", "th", "tbody", "do:", "messageItems", "addMessageItemView:", "messageItem:", "new"],
-referencedClasses: ["MessageItemView"]
+source: "renderOn: html        \x0a\x09viewDomElement := html div: [\x0a\x0a\x09\x09html h2: messageCollection title capitalized.\x0a\x0a\x09\x09html button \x0a\x09\x09    class: 'btn btn-primary'; \x0a\x09\x09    with: 'Add message'; \x0a\x09\x09    onClick: [ self addMessage ].\x0a\x09\x09\x09\x09\x0a\x09\x09html table class: 'table table-condensed'; with: [\x0a\x09\x09\x09html thead with: [\x0a\x09\x09\x09\x09html tr with: [\x0a\x09\x09\x09\x09        html th with: 'Num'.\x0a\x09\x09\x09\x09\x09html th with: 'Message'.\x0a\x09\x09\x09\x09].\x0a\x09\x09\x09].\x09\x09\x0a\x09\x09\x09messageCollectionPlaceholder := html tbody.\x0a\x0a\x09\x09].\x0a\x09]. \x0a\x09\x0a\x09self listAllMessages.",
+messageSends: ["div:", "h2:", "capitalized", "title", "class:", "button", "with:", "onClick:", "addMessage", "table", "thead", "tr", "th", "tbody", "listAllMessages"],
+referencedClasses: []
 }),
 smalltalk.MessageCollectionView);
 
@@ -340,7 +356,7 @@ smalltalk.MessageItem.comment="A message item - simply do not name it Message be
 smalltalk.addMethod(
 smalltalk.method({
 selector: "message",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -358,7 +374,7 @@ smalltalk.MessageItem);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "message:",
-category: 'accessing',
+protocol: 'accessing',
 fn: function (value){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -378,7 +394,7 @@ smalltalk.MessageItemView.comment="Message Item View\x0a\x0aIts possible to play
 smalltalk.addMethod(
 smalltalk.method({
 selector: "messageItem:",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (aMessageItem){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -394,7 +410,7 @@ smalltalk.MessageItemView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "refresh",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -413,7 +429,7 @@ smalltalk.MessageItemView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "removeFromDom",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -429,7 +445,7 @@ smalltalk.MessageItemView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "removeMessage",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -445,7 +461,7 @@ smalltalk.MessageItemView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "renderOn:",
-category: 'not yet classified',
+protocol: 'not yet classified',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 

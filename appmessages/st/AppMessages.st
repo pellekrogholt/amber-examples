@@ -99,6 +99,13 @@ addMessageItemView: aMessageItemView
 	messageCollectionPlaceholder with: aMessageItemView
 !
 
+listAllMessages
+
+	messageCollection messageItems do: [:item | 
+	    self addMessageItemView: (MessageItemView new messageItem: item).	    
+	].
+!
+
 messageCollection: aMessageCollection
 	messageCollection := aMessageCollection.
 !
@@ -127,11 +134,9 @@ renderOn: html
 			messageCollectionPlaceholder := html tbody.
 
 		].
-	].        
-	"TODO: how to do this inside the messageCollectionPlaceholder := html tbody."
-	messageCollection messageItems do: [:item | 
-	    self addMessageItemView: (MessageItemView new messageItem: item).	    
-	].
+	]. 
+	
+	self listAllMessages.
 ! !
 
 Object subclass: #MessageItem
