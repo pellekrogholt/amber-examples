@@ -19,7 +19,6 @@ buildUI
 
 mainView
 	^ mainView
-
 ! !
 
 App class instanceVariableNames: 'instance'!
@@ -45,12 +44,94 @@ Widget subclass: #MainView
 
 initialize
     messageCollectionView := MessageCollectionView new messageCollection: (MessageCollection new title: 'All messages').
-
 !
 
 renderOn: html
 	tagBrush := html.	
 	html div id: 'ui'; with: messageCollectionView.
+! !
+
+Object subclass: #MessageCollection
+	instanceVariableNames: 'messageItems title'
+	package: 'AppMessages'!
+
+!MessageCollection methodsFor: 'accessing'!
+
+title
+	^ title
+!
+
+title: value
+	title := value.
+! !
+
+!MessageCollection methodsFor: 'not yet classified'!
+
+messageItems
+	|messages|
+	"TODO should we use Set or Array"
+	messages := Array new add: (MessageItem new message: 'Message 1'); add: (MessageItem new message: 'Message 2'); add: (MessageItem new message: 'Message 3'); yourself.
+	^ messages
+! !
+
+Widget subclass: #MessageCollectionView
+	instanceVariableNames: 'messageCollection messageCollectionPlaceholder messageCollectionPlaceholderBody viewDomElement'
+	package: 'AppMessages'!
+!MessageCollectionView commentStamp!
+Message colletion view
+
+Play with it in the Workspace:
+
+	|c cView|
+	c := MessageCollection new title: 'My messages'.
+	cView := MessageCollectionView new messageCollection: c.
+	cView appendToJQuery: '#container' asJQuery.!
+
+!MessageCollectionView methodsFor: 'not yet classified'!
+
+addMessage
+    |m|
+    m := MessageItem new message: 'Message added through TTW'.
+    self addMessageItemView: (MessageItemView new messageItem: m).
+!
+
+addMessageItemView: aMessageItemView
+	messageCollectionPlaceholder with: aMessageItemView
+!
+
+messageCollection: aMessageCollection
+	messageCollection := aMessageCollection.
+!
+
+removeFromDom
+	viewDomElement asJQuery remove
+!
+
+renderOn: html        
+	viewDomElement := html div: [
+
+		html h2: messageCollection title capitalized.
+
+		html button 
+		    class: 'btn btn-primary'; 
+		    with: 'Add message'; 
+		    onClick: [ self addMessage ].
+				
+		html table class: 'table table-condensed'; with: [
+			html thead with: [
+				html tr with: [
+				        html th with: 'Num'.
+					html th with: 'Message'.
+				].
+			].		
+			messageCollectionPlaceholder := html tbody.
+
+		].
+	].        
+	"TODO: how to do this inside the messageCollectionPlaceholder := html tbody."
+	messageCollection messageItems do: [:item | 
+	    self addMessageItemView: (MessageItemView new messageItem: item).	    
+	].
 ! !
 
 Object subclass: #MessageItem
@@ -75,81 +156,6 @@ message: value
 	message := value.
 ! !
 
-Object subclass: #MessageCollection
-	instanceVariableNames: 'messageItems title'
-	package: 'AppMessages'!
-
-!MessageCollection methodsFor: 'not yet classified'!
-
-messageItems
-	|messages|
-	"TODO should we use Set or Array"
-	messages := Array new add: (MessageItem new message: 'Message 1'); add: (MessageItem new message: 'Message 2'); add: (MessageItem new message: 'Message 3'); yourself.
-	^ messages
-! !
-
-!MessageCollection methodsFor: 'accessing'!
-
-title
-	^ title
-!
-
-title: value
-	title := value.
-
-! !
-
-Widget subclass: #MessageCollectionView
-	instanceVariableNames: 'messageCollection messageCollectionPlaceholder messageCollectionPlaceholderBody viewDomElement'
-	package: 'AppMessages'!
-!MessageCollectionView commentStamp!
-Message colletion view
-
-Play with it in the Workspace:
-
-	|c cView|
-	c := MessageCollection new title: 'My messages'.
-	cView := MessageCollectionView new messageCollection: c.
-	cView appendToJQuery: '#container' asJQuery.!
-
-!MessageCollectionView methodsFor: 'not yet classified'!
-
-
-addMessageItemView: aMessageItemView
-	messageCollectionPlaceholder with: aMessageItemView
-!
-
-messageCollection: aMessageCollection
-	messageCollection := aMessageCollection.
-!
-
-removeFromDom
-	viewDomElement asJQuery remove
-!
-
-renderOn: html        
-	viewDomElement := html div: [
-
-		html h2: messageCollection title capitalized.
-				
-		html table class: 'table table-condensed'; with: [
-			html thead with: [
-				html tr with: [
-				        html th with: 'Num'.
-					html th with: 'Message'.
-				].
-			].		
-			messageCollectionPlaceholder := html tbody.
-
-		].
-	].        
-	"TODO: how to do this inside the messageCollectionPlaceholder := html tbody."
-	messageCollection messageItems do: [:item | 
-	    self addMessageItemView: (MessageItemView new messageItem: item).	    
-	].
-
-! !
-
 Widget subclass: #MessageItemView
 	instanceVariableNames: 'messageItem viewDomElement messagePlaceholder'
 	package: 'AppMessages'!
@@ -158,8 +164,9 @@ Message Item View
 
 Its possible to play with the view and show in the dom through the Workspace:
 
-	|items m mView|
-	items := App new messageItems.
+	|c items m mView|
+	c := MessageCollection new title: 'My messages'.
+	items := c messageItems.
 	m := items at:2. 
 	mView := MessageItemView new messageItem: m.
 	mView appendToJQuery: '#container' asJQuery.
@@ -183,11 +190,22 @@ removeFromDom
 	viewDomElement asJQuery remove
 !
 
+removeMessage
+    self removeFromDom
+    "TODO also remove items from collection - messageItems"
+!
+
 renderOn: html
 	viewDomElement := html tr with: [
 		messagePlaceholder := html with: [
 		    html td with: '0'.
 		    html td with: messageItem message.
+		    html td with: [
+			html button 
+			    class: 'btn btn-default'; 
+			    with: 'Delete'; 
+			    onClick: [ self removeMessage ]
+		    ].
 		]
 	]
 ! !

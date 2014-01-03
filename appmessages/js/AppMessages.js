@@ -207,6 +207,29 @@ smalltalk.addClass('MessageCollectionView', smalltalk.Widget, ['messageCollectio
 smalltalk.MessageCollectionView.comment="Message colletion view\x0a\x0aPlay with it in the Workspace:\x0a\x0a\x09|c cView|\x0a\x09c := MessageCollection new title: 'My messages'.\x0a\x09cView := MessageCollectionView new messageCollection: c.\x0a\x09cView appendToJQuery: '#container' asJQuery.";
 smalltalk.addMethod(
 smalltalk.method({
+selector: "addMessage",
+category: 'not yet classified',
+fn: function (){
+var self=this;
+var m;
+function $MessageItem(){return smalltalk.MessageItem||(typeof MessageItem=="undefined"?nil:MessageItem)}
+function $MessageItemView(){return smalltalk.MessageItemView||(typeof MessageItemView=="undefined"?nil:MessageItemView)}
+return smalltalk.withContext(function($ctx1) { 
+var $1;
+$1=_st($MessageItem())._new();
+$ctx1.sendIdx["new"]=1;
+m=_st($1)._message_("Message added through TTW");
+self._addMessageItemView_(_st(_st($MessageItemView())._new())._messageItem_(m));
+return self}, function($ctx1) {$ctx1.fill(self,"addMessage",{m:m},smalltalk.MessageCollectionView)})},
+args: [],
+source: "addMessage\x0a    |m|\x0a    m := MessageItem new message: 'Message added through TTW'.\x0a    self addMessageItemView: (MessageItemView new messageItem: m).",
+messageSends: ["message:", "new", "addMessageItemView:", "messageItem:"],
+referencedClasses: ["MessageItem", "MessageItemView"]
+}),
+smalltalk.MessageCollectionView);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "addMessageItemView:",
 category: 'not yet classified',
 fn: function (aMessageItemView){
@@ -261,41 +284,51 @@ fn: function (html){
 var self=this;
 function $MessageItemView(){return smalltalk.MessageItemView||(typeof MessageItemView=="undefined"?nil:MessageItemView)}
 return smalltalk.withContext(function($ctx1) { 
-var $1,$3,$2;
+var $1,$2,$3,$5,$4;
 self["@viewDomElement"]=_st(html)._div_((function(){
 return smalltalk.withContext(function($ctx2) {
 _st(html)._h2_(_st(_st(self["@messageCollection"])._title())._capitalized());
-$1=_st(html)._table();
-_st($1)._class_("table table-condensed");
-$2=_st($1)._with_((function(){
+$1=_st(html)._button();
+_st($1)._class_("btn btn-primary");
+$ctx2.sendIdx["class:"]=1;
+_st($1)._with_("Add message");
+$ctx2.sendIdx["with:"]=1;
+$2=_st($1)._onClick_((function(){
+return smalltalk.withContext(function($ctx3) {
+return self._addMessage();
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$2;
+$3=_st(html)._table();
+_st($3)._class_("table table-condensed");
+$4=_st($3)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
 _st(_st(html)._thead())._with_((function(){
 return smalltalk.withContext(function($ctx4) {
 return _st(_st(html)._tr())._with_((function(){
 return smalltalk.withContext(function($ctx5) {
-$3=_st(html)._th();
+$5=_st(html)._th();
 $ctx5.sendIdx["th"]=1;
-_st($3)._with_("Num");
-$ctx5.sendIdx["with:"]=4;
+_st($5)._with_("Num");
+$ctx5.sendIdx["with:"]=5;
 return _st(_st(html)._th())._with_("Message");
-}, function($ctx5) {$ctx5.fillBlock({},$ctx4,4)})}));
-$ctx4.sendIdx["with:"]=3;
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
-$ctx3.sendIdx["with:"]=2;
+}, function($ctx5) {$ctx5.fillBlock({},$ctx4,5)})}));
+$ctx4.sendIdx["with:"]=4;
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,4)})}));
+$ctx3.sendIdx["with:"]=3;
 self["@messageCollectionPlaceholder"]=_st(html)._tbody();
 return self["@messageCollectionPlaceholder"];
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
-$ctx2.sendIdx["with:"]=1;
-return $2;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
+$ctx2.sendIdx["with:"]=2;
+return $4;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 _st(_st(self["@messageCollection"])._messageItems())._do_((function(item){
 return smalltalk.withContext(function($ctx2) {
 return self._addMessageItemView_(_st(_st($MessageItemView())._new())._messageItem_(item));
-}, function($ctx2) {$ctx2.fillBlock({item:item},$ctx1,5)})}));
+}, function($ctx2) {$ctx2.fillBlock({item:item},$ctx1,6)})}));
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.MessageCollectionView)})},
 args: ["html"],
-source: "renderOn: html        \x0a\x09viewDomElement := html div: [\x0a\x0a\x09\x09html h2: messageCollection title capitalized.\x0a\x09\x09\x09\x09\x0a\x09\x09html table class: 'table table-condensed'; with: [\x0a\x09\x09\x09html thead with: [\x0a\x09\x09\x09\x09html tr with: [\x0a\x09\x09\x09\x09        html th with: 'Num'.\x0a\x09\x09\x09\x09\x09html th with: 'Message'.\x0a\x09\x09\x09\x09].\x0a\x09\x09\x09].\x09\x09\x0a\x09\x09\x09messageCollectionPlaceholder := html tbody.\x0a\x0a\x09\x09].\x0a\x09].        \x0a\x09\x22TODO: how to do this inside the messageCollectionPlaceholder := html tbody.\x22\x0a\x09messageCollection messageItems do: [:item | \x0a\x09    self addMessageItemView: (MessageItemView new messageItem: item).\x09    \x0a\x09].",
-messageSends: ["div:", "h2:", "capitalized", "title", "class:", "table", "with:", "thead", "tr", "th", "tbody", "do:", "messageItems", "addMessageItemView:", "messageItem:", "new"],
+source: "renderOn: html        \x0a\x09viewDomElement := html div: [\x0a\x0a\x09\x09html h2: messageCollection title capitalized.\x0a\x0a\x09\x09html button \x0a\x09\x09    class: 'btn btn-primary'; \x0a\x09\x09    with: 'Add message'; \x0a\x09\x09    onClick: [ self addMessage ].\x0a\x09\x09\x09\x09\x0a\x09\x09html table class: 'table table-condensed'; with: [\x0a\x09\x09\x09html thead with: [\x0a\x09\x09\x09\x09html tr with: [\x0a\x09\x09\x09\x09        html th with: 'Num'.\x0a\x09\x09\x09\x09\x09html th with: 'Message'.\x0a\x09\x09\x09\x09].\x0a\x09\x09\x09].\x09\x09\x0a\x09\x09\x09messageCollectionPlaceholder := html tbody.\x0a\x0a\x09\x09].\x0a\x09].        \x0a\x09\x22TODO: how to do this inside the messageCollectionPlaceholder := html tbody.\x22\x0a\x09messageCollection messageItems do: [:item | \x0a\x09    self addMessageItemView: (MessageItemView new messageItem: item).\x09    \x0a\x09].",
+messageSends: ["div:", "h2:", "capitalized", "title", "class:", "button", "with:", "onClick:", "addMessage", "table", "thead", "tr", "th", "tbody", "do:", "messageItems", "addMessageItemView:", "messageItem:", "new"],
 referencedClasses: ["MessageItemView"]
 }),
 smalltalk.MessageCollectionView);
@@ -341,7 +374,7 @@ smalltalk.MessageItem);
 
 
 smalltalk.addClass('MessageItemView', smalltalk.Widget, ['messageItem', 'viewDomElement', 'messagePlaceholder'], 'AppMessages');
-smalltalk.MessageItemView.comment="Message Item View\x0a\x0aIts possible to play with the view and show in the dom through the Workspace:\x0a\x0a\x09|items m mView|\x0a\x09items := App new messageItems.\x0a\x09m := items at:2. \x0a\x09mView := MessageItemView new messageItem: m.\x0a\x09mView appendToJQuery: '#container' asJQuery.\x0a\x09\x22lets update item 2 with a new message\x22\x0a\x09m message: 'Message 2 adjusted'. \x0a\x09mView refresh.\x0a\x09\x22lets remove item from dom - well might be a bit cumbersome in the Workspace\x22  \x0a\x09mView removeFromDom.";
+smalltalk.MessageItemView.comment="Message Item View\x0a\x0aIts possible to play with the view and show in the dom through the Workspace:\x0a\x0a\x09|c items m mView|\x0a\x09c := MessageCollection new title: 'My messages'.\x0a\x09items := c messageItems.\x0a\x09m := items at:2. \x0a\x09mView := MessageItemView new messageItem: m.\x0a\x09mView appendToJQuery: '#container' asJQuery.\x0a\x09\x22lets update item 2 with a new message\x22\x0a\x09m message: 'Message 2 adjusted'. \x0a\x09mView refresh.\x0a\x09\x22lets remove item from dom - well might be a bit cumbersome in the Workspace\x22  \x0a\x09mView removeFromDom.";
 smalltalk.addMethod(
 smalltalk.method({
 selector: "messageItem:",
@@ -395,12 +428,28 @@ smalltalk.MessageItemView);
 
 smalltalk.addMethod(
 smalltalk.method({
+selector: "removeMessage",
+category: 'not yet classified',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+self._removeFromDom();
+return self}, function($ctx1) {$ctx1.fill(self,"removeMessage",{},smalltalk.MessageItemView)})},
+args: [],
+source: "removeMessage\x0a    self removeFromDom\x0a    \x22TODO also remove items from collection - messageItems\x22",
+messageSends: ["removeFromDom"],
+referencedClasses: []
+}),
+smalltalk.MessageItemView);
+
+smalltalk.addMethod(
+smalltalk.method({
 selector: "renderOn:",
 category: 'not yet classified',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
-var $1;
+var $1,$2,$3,$4;
 self["@viewDomElement"]=_st(_st(html)._tr())._with_((function(){
 return smalltalk.withContext(function($ctx2) {
 self["@messagePlaceholder"]=_st(html)._with_((function(){
@@ -409,7 +458,22 @@ $1=_st(html)._td();
 $ctx3.sendIdx["td"]=1;
 _st($1)._with_("0");
 $ctx3.sendIdx["with:"]=3;
-return _st(_st(html)._td())._with_(_st(self["@messageItem"])._message());
+$2=_st(html)._td();
+$ctx3.sendIdx["td"]=2;
+_st($2)._with_(_st(self["@messageItem"])._message());
+$ctx3.sendIdx["with:"]=4;
+return _st(_st(html)._td())._with_((function(){
+return smalltalk.withContext(function($ctx4) {
+$3=_st(html)._button();
+_st($3)._class_("btn btn-default");
+_st($3)._with_("Delete");
+$4=_st($3)._onClick_((function(){
+return smalltalk.withContext(function($ctx5) {
+return self._removeMessage();
+}, function($ctx5) {$ctx5.fillBlock({},$ctx4,4)})}));
+return $4;
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,3)})}));
+$ctx3.sendIdx["with:"]=5;
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
 $ctx2.sendIdx["with:"]=2;
 return self["@messagePlaceholder"];
@@ -417,8 +481,8 @@ return self["@messagePlaceholder"];
 $ctx1.sendIdx["with:"]=1;
 return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.MessageItemView)})},
 args: ["html"],
-source: "renderOn: html\x0a\x09viewDomElement := html tr with: [\x0a\x09\x09messagePlaceholder := html with: [\x0a\x09\x09    html td with: '0'.\x0a\x09\x09    html td with: messageItem message.\x0a\x09\x09]\x0a\x09]",
-messageSends: ["with:", "tr", "td", "message"],
+source: "renderOn: html\x0a\x09viewDomElement := html tr with: [\x0a\x09\x09messagePlaceholder := html with: [\x0a\x09\x09    html td with: '0'.\x0a\x09\x09    html td with: messageItem message.\x0a\x09\x09    html td with: [\x0a\x09\x09\x09html button \x0a\x09\x09\x09    class: 'btn btn-default'; \x0a\x09\x09\x09    with: 'Delete'; \x0a\x09\x09\x09    onClick: [ self removeMessage ]\x0a\x09\x09    ].\x0a\x09\x09]\x0a\x09]",
+messageSends: ["with:", "tr", "td", "message", "class:", "button", "onClick:", "removeMessage"],
 referencedClasses: []
 }),
 smalltalk.MessageItemView);
