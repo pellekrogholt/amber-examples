@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>My First Amber Project</title>
+    <script src="../vendor/amber/support/amber.js"></script>
+    <script src="../vendor/amber/support/requirejs/require.min.js"></script>
+    <script type="text/javascript">
+      require.config({ paths: {
+        'com_example_hello_grunt': 'js', //mapping compiled .js files
+        'com_example_hello_grunt/_source': 'st' //mapping smalltalk source files
+      }});
+      require(['amber/devel','com_example_hello_grunt/HelloGruntApp'], function (smalltalk) {
+        smalltalk.defaultAmdNamespace = "com_example_hello_grunt"; //used for all new packages in IDE
+        smalltalk.initialize();
+        smalltalk.HelloGrunt._new()._begin();
+      });
+    </script>
+  </head>
+  <body>
+    <article>
+      <h1>My First Amber Project</h1>
+      <button onclick="require('amber_vm/smalltalk').Browser._open()">class browser</button>
+      <button id="sayHelloGrunt">say hello</button>
+    </article>
+
+  </body>
+</html>

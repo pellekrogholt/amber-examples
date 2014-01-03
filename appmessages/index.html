@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>App messages</title>
+    <script src="../vendor/amber/support/amber.js"></script>
+    <script src="../vendor/amber/support/requirejs/require.min.js"></script>
+    <script type="text/javascript">
+      require.config({ paths: {
+        'dk_itu_app_messages': 'js', //mapping compiled .js files
+        'dk_itu_app_messages/_source': 'st' //mapping smalltalk source files
+      }});
+      require(['amber/devel','dk_itu_app_messages/AppMessages'], function (smalltalk) {
+        smalltalk.defaultAmdNamespace = "dk_itu_app_messages"; //used for all new packages in IDE
+        smalltalk.initialize();
+        
+        $(function() {
+          // we don't use _new() here its done in the app
+          smalltalk.App._begin()
+          require('amber_vm/smalltalk').Browser._open()
+        })
+
+      });
+    </script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+
+
+
+    <div id='container'></div>
+    <!-- <article> -->
+    <!--   <h1>App messages</h1> -->
+    <!--   <button onclick="require('amber_vm/smalltalk').Browser._open()">class browser</button> -->
+    <!--   <button id="sayHello">say hello</button> -->
+    <!-- </article> -->
+
+  </body>
+</html>
