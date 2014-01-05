@@ -114,7 +114,8 @@ removeFromDom
 	viewDomElement asJQuery remove
 !
 
-renderOn: html        
+renderOn: html
+|modalDOMElement|        
 	viewDomElement := html div: [
 
 		html h2: messageCollection title capitalized.
@@ -123,6 +124,39 @@ renderOn: html
 		    class: 'btn btn-primary'; 
 		    with: 'Add message'; 
 		    onClick: [ self addMessage ].
+
+
+		html button 
+		    class: 'btn btn-primary'; 
+		    with: 'Add message modal'; 
+		    onClick: [ modalDOMElement asJQuery modal: 'show' ].
+
+		modalDOMElement := html div class:'modal fade'; with:[
+		  html div class:'modal-dialog'; with:[
+		    html div class:'modal-content'; with:[
+		      html div class:'modal-header'; with:[
+			html button
+			  class:'close'; 
+			  at: 'data-dismiss' put:'modal';
+			  at: 'aria-hidden' put: 'true';
+			  with: 'x'.
+			html h4 class:'modal-title'; with:'Modal title'.
+		      ].
+		      html div class:'modal-body'; with:[
+			html p with: 'One fine body&hellip;'
+		      ].
+		      html div class:'modal-footer'; with:[
+			html button 
+			  class:'btn btn-default';
+			  at: 'data-dismiss' put:'modal';
+			  with: 'Close'.
+			html button
+			  class:'btn btn-primary';
+			  with: 'Save changes'.
+		      ].
+		    ].
+		  ].
+		].
 				
 		html table class: 'table table-condensed'; with: [
 			html thead with: [

@@ -7,7 +7,7 @@ smalltalk.App.comment="App Messages\x0a\x0aPlay around with App in the Workspace
 smalltalk.addMethod(
 smalltalk.method({
 selector: "buildUI",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (){
 var self=this;
 function $MainView(){return smalltalk.MainView||(typeof MainView=="undefined"?nil:MainView)}
@@ -29,7 +29,7 @@ smalltalk.App);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "mainView",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -49,7 +49,7 @@ smalltalk.App.klass.iVarNames = ['instance'];
 smalltalk.addMethod(
 smalltalk.method({
 selector: "begin",
-protocol: 'bootstrapping',
+category: 'bootstrapping',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -66,7 +66,7 @@ smalltalk.App.klass);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "instance",
-protocol: 'accessing',
+category: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -86,7 +86,7 @@ smalltalk.addClass('MainView', smalltalk.Widget, ['tagBrush', 'messageCollection
 smalltalk.addMethod(
 smalltalk.method({
 selector: "initialize",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (){
 var self=this;
 function $MessageCollectionView(){return smalltalk.MessageCollectionView||(typeof MessageCollectionView=="undefined"?nil:MessageCollectionView)}
@@ -107,7 +107,7 @@ smalltalk.MainView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "renderOn:",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -130,7 +130,7 @@ smalltalk.addClass('MessageCollection', smalltalk.Object, ['messageItems', 'titl
 smalltalk.addMethod(
 smalltalk.method({
 selector: "messageItems",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (){
 var self=this;
 var messages;
@@ -170,7 +170,7 @@ smalltalk.MessageCollection);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "title",
-protocol: 'accessing',
+category: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -188,7 +188,7 @@ smalltalk.MessageCollection);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "title:",
-protocol: 'accessing',
+category: 'accessing',
 fn: function (value){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -208,7 +208,7 @@ smalltalk.MessageCollectionView.comment="Message colletion view\x0a\x0aPlay with
 smalltalk.addMethod(
 smalltalk.method({
 selector: "addMessage",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (){
 var self=this;
 var m;
@@ -231,7 +231,7 @@ smalltalk.MessageCollectionView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "addMessageItemView:",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (aMessageItemView){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -247,7 +247,7 @@ smalltalk.MessageCollectionView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "listAllMessages",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (){
 var self=this;
 function $MessageItemView(){return smalltalk.MessageItemView||(typeof MessageItemView=="undefined"?nil:MessageItemView)}
@@ -267,7 +267,7 @@ smalltalk.MessageCollectionView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "messageCollection:",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (aMessageCollection){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -283,7 +283,7 @@ smalltalk.MessageCollectionView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "removeFromDom",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -299,15 +299,17 @@ smalltalk.MessageCollectionView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "renderOn:",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (html){
 var self=this;
+var modalDOMElement;
 return smalltalk.withContext(function($ctx1) { 
-var $1,$2,$3,$5,$4;
+var $1,$2,$3,$4,$5,$7,$9,$11,$13,$14,$15,$16,$12,$17,$18,$19,$21,$22,$23,$24,$20,$10,$8,$6,$25,$27,$26;
 self["@viewDomElement"]=_st(html)._div_((function(){
 return smalltalk.withContext(function($ctx2) {
 _st(html)._h2_(_st(_st(self["@messageCollection"])._title())._capitalized());
 $1=_st(html)._button();
+$ctx2.sendIdx["button"]=1;
 _st($1)._class_("btn btn-primary");
 $ctx2.sendIdx["class:"]=1;
 _st($1)._with_("Add message");
@@ -316,35 +318,134 @@ $2=_st($1)._onClick_((function(){
 return smalltalk.withContext(function($ctx3) {
 return self._addMessage();
 }, function($ctx3) {$ctx3.fillBlock({},$ctx2,2)})}));
+$ctx2.sendIdx["onClick:"]=1;
 $2;
-$3=_st(html)._table();
-_st($3)._class_("table table-condensed");
-$4=_st($3)._with_((function(){
+$3=_st(html)._button();
+$ctx2.sendIdx["button"]=2;
+_st($3)._class_("btn btn-primary");
+$ctx2.sendIdx["class:"]=2;
+_st($3)._with_("Add message modal");
+$ctx2.sendIdx["with:"]=2;
+$4=_st($3)._onClick_((function(){
+return smalltalk.withContext(function($ctx3) {
+return _st(_st(modalDOMElement)._asJQuery())._modal_("show");
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
+$4;
+$5=_st(html)._div();
+$ctx2.sendIdx["div"]=1;
+_st($5)._class_("modal fade");
+$ctx2.sendIdx["class:"]=3;
+$6=_st($5)._with_((function(){
+return smalltalk.withContext(function($ctx3) {
+$7=_st(html)._div();
+$ctx3.sendIdx["div"]=2;
+_st($7)._class_("modal-dialog");
+$ctx3.sendIdx["class:"]=4;
+$8=_st($7)._with_((function(){
+return smalltalk.withContext(function($ctx4) {
+$9=_st(html)._div();
+$ctx4.sendIdx["div"]=3;
+_st($9)._class_("modal-content");
+$ctx4.sendIdx["class:"]=5;
+$10=_st($9)._with_((function(){
+return smalltalk.withContext(function($ctx5) {
+$11=_st(html)._div();
+$ctx5.sendIdx["div"]=4;
+_st($11)._class_("modal-header");
+$ctx5.sendIdx["class:"]=6;
+$12=_st($11)._with_((function(){
+return smalltalk.withContext(function($ctx6) {
+$13=_st(html)._button();
+$ctx6.sendIdx["button"]=3;
+_st($13)._class_("close");
+$ctx6.sendIdx["class:"]=7;
+_st($13)._at_put_("data-dismiss","modal");
+$ctx6.sendIdx["at:put:"]=1;
+_st($13)._at_put_("aria-hidden","true");
+$ctx6.sendIdx["at:put:"]=2;
+$14=_st($13)._with_("x");
+$ctx6.sendIdx["with:"]=7;
+$14;
+$15=_st(html)._h4();
+_st($15)._class_("modal-title");
+$ctx6.sendIdx["class:"]=8;
+$16=_st($15)._with_("Modal title");
+$ctx6.sendIdx["with:"]=8;
+return $16;
+}, function($ctx6) {$ctx6.fillBlock({},$ctx5,7)})}));
+$ctx5.sendIdx["with:"]=6;
+$12;
+$17=_st(html)._div();
+$ctx5.sendIdx["div"]=5;
+_st($17)._class_("modal-body");
+$ctx5.sendIdx["class:"]=9;
+$18=_st($17)._with_((function(){
+return smalltalk.withContext(function($ctx6) {
+return _st(_st(html)._p())._with_("One fine body&hellip;");
+$ctx6.sendIdx["with:"]=10;
+}, function($ctx6) {$ctx6.fillBlock({},$ctx5,8)})}));
+$ctx5.sendIdx["with:"]=9;
+$18;
+$19=_st(html)._div();
+_st($19)._class_("modal-footer");
+$ctx5.sendIdx["class:"]=10;
+$20=_st($19)._with_((function(){
+return smalltalk.withContext(function($ctx6) {
+$21=_st(html)._button();
+$ctx6.sendIdx["button"]=4;
+_st($21)._class_("btn btn-default");
+$ctx6.sendIdx["class:"]=11;
+_st($21)._at_put_("data-dismiss","modal");
+$22=_st($21)._with_("Close");
+$ctx6.sendIdx["with:"]=12;
+$22;
+$23=_st(html)._button();
+_st($23)._class_("btn btn-primary");
+$ctx6.sendIdx["class:"]=12;
+$24=_st($23)._with_("Save changes");
+$ctx6.sendIdx["with:"]=13;
+return $24;
+}, function($ctx6) {$ctx6.fillBlock({},$ctx5,9)})}));
+$ctx5.sendIdx["with:"]=11;
+return $20;
+}, function($ctx5) {$ctx5.fillBlock({},$ctx4,6)})}));
+$ctx4.sendIdx["with:"]=5;
+return $10;
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,5)})}));
+$ctx3.sendIdx["with:"]=4;
+return $8;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,4)})}));
+$ctx2.sendIdx["with:"]=3;
+modalDOMElement=$6;
+modalDOMElement;
+$25=_st(html)._table();
+_st($25)._class_("table table-condensed");
+$26=_st($25)._with_((function(){
 return smalltalk.withContext(function($ctx3) {
 _st(_st(html)._thead())._with_((function(){
 return smalltalk.withContext(function($ctx4) {
 return _st(_st(html)._tr())._with_((function(){
 return smalltalk.withContext(function($ctx5) {
-$5=_st(html)._th();
+$27=_st(html)._th();
 $ctx5.sendIdx["th"]=1;
-_st($5)._with_("Num");
-$ctx5.sendIdx["with:"]=5;
+_st($27)._with_("Num");
+$ctx5.sendIdx["with:"]=17;
 return _st(_st(html)._th())._with_("Message");
-}, function($ctx5) {$ctx5.fillBlock({},$ctx4,5)})}));
-$ctx4.sendIdx["with:"]=4;
-}, function($ctx4) {$ctx4.fillBlock({},$ctx3,4)})}));
-$ctx3.sendIdx["with:"]=3;
+}, function($ctx5) {$ctx5.fillBlock({},$ctx4,12)})}));
+$ctx4.sendIdx["with:"]=16;
+}, function($ctx4) {$ctx4.fillBlock({},$ctx3,11)})}));
+$ctx3.sendIdx["with:"]=15;
 self["@messageCollectionPlaceholder"]=_st(html)._tbody();
 return self["@messageCollectionPlaceholder"];
-}, function($ctx3) {$ctx3.fillBlock({},$ctx2,3)})}));
-$ctx2.sendIdx["with:"]=2;
-return $4;
+}, function($ctx3) {$ctx3.fillBlock({},$ctx2,10)})}));
+$ctx2.sendIdx["with:"]=14;
+return $26;
 }, function($ctx2) {$ctx2.fillBlock({},$ctx1,1)})}));
 self._listAllMessages();
-return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html},smalltalk.MessageCollectionView)})},
+return self}, function($ctx1) {$ctx1.fill(self,"renderOn:",{html:html,modalDOMElement:modalDOMElement},smalltalk.MessageCollectionView)})},
 args: ["html"],
-source: "renderOn: html        \x0a\x09viewDomElement := html div: [\x0a\x0a\x09\x09html h2: messageCollection title capitalized.\x0a\x0a\x09\x09html button \x0a\x09\x09    class: 'btn btn-primary'; \x0a\x09\x09    with: 'Add message'; \x0a\x09\x09    onClick: [ self addMessage ].\x0a\x09\x09\x09\x09\x0a\x09\x09html table class: 'table table-condensed'; with: [\x0a\x09\x09\x09html thead with: [\x0a\x09\x09\x09\x09html tr with: [\x0a\x09\x09\x09\x09        html th with: 'Num'.\x0a\x09\x09\x09\x09\x09html th with: 'Message'.\x0a\x09\x09\x09\x09].\x0a\x09\x09\x09].\x09\x09\x0a\x09\x09\x09messageCollectionPlaceholder := html tbody.\x0a\x0a\x09\x09].\x0a\x09]. \x0a\x09\x0a\x09self listAllMessages.",
-messageSends: ["div:", "h2:", "capitalized", "title", "class:", "button", "with:", "onClick:", "addMessage", "table", "thead", "tr", "th", "tbody", "listAllMessages"],
+source: "renderOn: html\x0a|modalDOMElement|        \x0a\x09viewDomElement := html div: [\x0a\x0a\x09\x09html h2: messageCollection title capitalized.\x0a\x0a\x09\x09html button \x0a\x09\x09    class: 'btn btn-primary'; \x0a\x09\x09    with: 'Add message'; \x0a\x09\x09    onClick: [ self addMessage ].\x0a\x0a\x0a\x09\x09html button \x0a\x09\x09    class: 'btn btn-primary'; \x0a\x09\x09    with: 'Add message modal'; \x0a\x09\x09    onClick: [ modalDOMElement asJQuery modal: 'show' ].\x0a\x0a\x09\x09modalDOMElement := html div class:'modal fade'; with:[\x0a\x09\x09  html div class:'modal-dialog'; with:[\x0a\x09\x09    html div class:'modal-content'; with:[\x0a\x09\x09      html div class:'modal-header'; with:[\x0a\x09\x09\x09html button\x0a\x09\x09\x09  class:'close'; \x0a\x09\x09\x09  at: 'data-dismiss' put:'modal';\x0a\x09\x09\x09  at: 'aria-hidden' put: 'true';\x0a\x09\x09\x09  with: 'x'.\x0a\x09\x09\x09html h4 class:'modal-title'; with:'Modal title'.\x0a\x09\x09      ].\x0a\x09\x09      html div class:'modal-body'; with:[\x0a\x09\x09\x09html p with: 'One fine body&hellip;'\x0a\x09\x09      ].\x0a\x09\x09      html div class:'modal-footer'; with:[\x0a\x09\x09\x09html button \x0a\x09\x09\x09  class:'btn btn-default';\x0a\x09\x09\x09  at: 'data-dismiss' put:'modal';\x0a\x09\x09\x09  with: 'Close'.\x0a\x09\x09\x09html button\x0a\x09\x09\x09  class:'btn btn-primary';\x0a\x09\x09\x09  with: 'Save changes'.\x0a\x09\x09      ].\x0a\x09\x09    ].\x0a\x09\x09  ].\x0a\x09\x09].\x0a\x09\x09\x09\x09\x0a\x09\x09html table class: 'table table-condensed'; with: [\x0a\x09\x09\x09html thead with: [\x0a\x09\x09\x09\x09html tr with: [\x0a\x09\x09\x09\x09        html th with: 'Num'.\x0a\x09\x09\x09\x09\x09html th with: 'Message'.\x0a\x09\x09\x09\x09].\x0a\x09\x09\x09].\x09\x09\x0a\x09\x09\x09messageCollectionPlaceholder := html tbody.\x0a\x0a\x09\x09].\x0a\x09]. \x0a\x09\x0a\x09self listAllMessages.",
+messageSends: ["div:", "h2:", "capitalized", "title", "class:", "button", "with:", "onClick:", "addMessage", "modal:", "asJQuery", "div", "at:put:", "h4", "p", "table", "thead", "tr", "th", "tbody", "listAllMessages"],
 referencedClasses: []
 }),
 smalltalk.MessageCollectionView);
@@ -356,7 +457,7 @@ smalltalk.MessageItem.comment="A message item - simply do not name it Message be
 smalltalk.addMethod(
 smalltalk.method({
 selector: "message",
-protocol: 'accessing',
+category: 'accessing',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -374,7 +475,7 @@ smalltalk.MessageItem);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "message:",
-protocol: 'accessing',
+category: 'accessing',
 fn: function (value){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -394,7 +495,7 @@ smalltalk.MessageItemView.comment="Message Item View\x0a\x0aIts possible to play
 smalltalk.addMethod(
 smalltalk.method({
 selector: "messageItem:",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (aMessageItem){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -410,7 +511,7 @@ smalltalk.MessageItemView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "refresh",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -429,7 +530,7 @@ smalltalk.MessageItemView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "removeFromDom",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -445,7 +546,7 @@ smalltalk.MessageItemView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "removeMessage",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 
@@ -461,7 +562,7 @@ smalltalk.MessageItemView);
 smalltalk.addMethod(
 smalltalk.method({
 selector: "renderOn:",
-protocol: 'not yet classified',
+category: 'not yet classified',
 fn: function (html){
 var self=this;
 return smalltalk.withContext(function($ctx1) { 

@@ -5,11 +5,26 @@
     <script src="../vendor/amber/support/amber.js"></script>
     <script src="../vendor/amber/support/requirejs/require.min.js"></script>
     <script type="text/javascript">
-      require.config({ paths: {
-        'dk_itu_app_messages': 'js', //mapping compiled .js files
-        'dk_itu_app_messages/_source': 'st' //mapping smalltalk source files
-      }});
-      require(['amber/devel','dk_itu_app_messages/AppMessages'], function (smalltalk) {
+      require.config({ 
+
+        paths: {
+          'dk_itu_app_messages': 'js', //mapping compiled .js files
+          'dk_itu_app_messages/_source': 'st', //mapping smalltalk source files
+          'bootstrap' : 'js/bootstrap'
+        },
+
+        shim: {
+            'bootstrap': {
+                deps: ['jquery']
+            }
+        }
+
+      });
+      require(['amber/devel', 'bootstrap', 'dk_itu_app_messages/AppMessages'], function (smalltalk) {
+
+        window.onbeforeunload = function() {
+              return 'Do you really want to close?';
+            };
         smalltalk.defaultAmdNamespace = "dk_itu_app_messages"; //used for all new packages in IDE
         smalltalk.initialize();
         
