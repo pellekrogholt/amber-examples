@@ -13,7 +13,7 @@ module.exports = function(grunt) {
       },
       hellogrunt: {
         src: ['st/HelloGruntApp.st'],
-        libraries: ['Canvas'],
+        libraries: ['Web'],
         output_dir: 'js',
         deploy: true,
         amd_namespace: 'com_example_hello_grunt'

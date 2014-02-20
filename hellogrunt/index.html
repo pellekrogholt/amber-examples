@@ -12,7 +12,8 @@
       require(['amber/devel','com_example_hello_grunt/HelloGruntApp'], function (smalltalk) {
         smalltalk.defaultAmdNamespace = "com_example_hello_grunt"; //used for all new packages in IDE
         smalltalk.initialize();
-        smalltalk.HelloGrunt._new()._begin();
+      smalltalk.HelloGrunt._new()._begin();
+      require('amber/helpers').popupHelios()
       });
     </script>
   </head>
