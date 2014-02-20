@@ -2,6 +2,44 @@ define("com_example_hello_grunt/HelloGruntApp", ["amber_vm/smalltalk", "amber_vm
 smalltalk.addPackage('HelloGruntApp');
 smalltalk.packages["HelloGruntApp"].transport = {"type":"amd","amdNamespace":"com_example_hello_grunt"};
 
+smalltalk.addClass('Foo', globals.Object, [], 'HelloGruntApp');
+smalltalk.addMethod(
+smalltalk.method({
+selector: "bar",
+protocol: 'initialization',
+fn: function (){
+var self=this;
+var myValue;
+return smalltalk.withContext(function($ctx1) { 
+myValue=(5);
+_st(myValue).__plus((8));
+self._halt();
+return self}, function($ctx1) {$ctx1.fill(self,"bar",{myValue:myValue},globals.Foo)})},
+args: [],
+source: "bar\x0a    |myValue|\x0a\x0a    myValue := 5.\x0a    myValue + 8.\x0a    \x0a    \x22set a breakpoint example\x22\x0a    self halt",
+messageSends: ["+", "halt"],
+referencedClasses: []
+}),
+globals.Foo);
+
+smalltalk.addMethod(
+smalltalk.method({
+selector: "initialize",
+protocol: 'initialization',
+fn: function (){
+var self=this;
+return smalltalk.withContext(function($ctx1) { 
+globals.Foo.superclass.fn.prototype._initialize.apply(_st(self), []);
+return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.Foo)})},
+args: [],
+source: "initialize\x0a    super initialize.",
+messageSends: ["initialize"],
+referencedClasses: []
+}),
+globals.Foo);
+
+
+
 smalltalk.addClass('HelloGrunt', globals.Object, [], 'HelloGruntApp');
 smalltalk.addMethod(
 smalltalk.method({
@@ -37,16 +75,12 @@ fn: function (){
 var self=this;
 function $MyWidget(){return globals.MyWidget||(typeof MyWidget=="undefined"?nil:MyWidget)}
 return smalltalk.withContext(function($ctx1) { 
-var $1;
 globals.HelloGrunt.superclass.fn.prototype._initialize.apply(_st(self), []);
-$1="#my-widget-wrapper"._asJQuery();
-$ctx1.sendIdx["asJQuery"]=1;
-_st($1)._empty();
-_st(_st($MyWidget())._new())._appendToJQuery_("#my-widget-wrapper"._asJQuery());
+_st(_st($MyWidget())._new())._appendToJQuery_("body"._asJQuery());
 return self}, function($ctx1) {$ctx1.fill(self,"initialize",{},globals.HelloGrunt)})},
 args: [],
-source: "initialize\x0a\x09super initialize.\x0a\x09\x0a\x09\x22set up my widget\x22\x0a\x09'#my-widget-wrapper' asJQuery empty.\x0a\x09MyWidget new appendToJQuery: '#my-widget-wrapper' asJQuery.",
-messageSends: ["initialize", "empty", "asJQuery", "appendToJQuery:", "new"],
+source: "initialize\x0a\x09super initialize.\x0a\x0a\x09\x22set up my widget\x22\x0a\x09MyWidget new appendToJQuery: 'body' asJQuery.",
+messageSends: ["initialize", "appendToJQuery:", "new", "asJQuery"],
 referencedClasses: ["MyWidget"]
 }),
 globals.HelloGrunt);

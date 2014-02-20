@@ -1,4 +1,25 @@
 Smalltalk createPackage: 'HelloGruntApp'!
+
+Object subclass: #Foo
+    instanceVariableNames: ''
+    package: 'HelloGruntApp'!
+
+!Foo methodsFor: 'initialization'!
+
+bar
+    |myValue|
+
+    myValue := 5.
+    myValue + 8.
+    
+    "set a breakpoint example"
+    self halt
+!
+
+initialize
+    super initialize.
+! !
+
 Object subclass: #HelloGrunt
 	instanceVariableNames: ''
 	package: 'HelloGruntApp'!
@@ -7,10 +28,10 @@ Object subclass: #HelloGrunt
 
 initialize
 	super initialize.
-	
+
 	"set up my widget"
-	'#my-widget-wrapper' asJQuery empty.
-	MyWidget new appendToJQuery: '#my-widget-wrapper' asJQuery.
+	MyWidget new appendToJQuery: 'body' asJQuery.
+	
 ! !
 
 !HelloGrunt methodsFor: 'not yet classified'!
@@ -23,6 +44,7 @@ begin
 	button click: [button after: '<p>' , msg , '</p>'].
 ! !
 
+
 Widget subclass: #MyWidget
 	instanceVariableNames: ''
 	package: 'HelloGruntApp'!
@@ -34,3 +56,5 @@ renderOn: html
 	html div with: 'my widget'.
 ! !
 
+
+    
